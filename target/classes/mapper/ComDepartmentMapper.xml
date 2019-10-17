@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shc.mapper.ComDepartmentMapper">
+	<resultMap type="com.shc.pojo.ComDepartmentEntity" id="BaseResultMap">
+		<id column="dep_no" javaType="java.lang.String" jdbcType="VARCHAR" property="dep_no" typeHandler="org.apache.ibatis.type.StringTypeHandler"/>
+		<result column="cur_dep_no" javaType="java.lang.String" jdbcType="VARCHAR" property="cur_dep_no" typeHandler="org.apache.ibatis.type.StringTypeHandler"/>
+		<result column="dep_name" javaType="java.lang.String" jdbcType="VARCHAR" property="dep_name" typeHandler="org.apache.ibatis.type.StringTypeHandler"/>
+		<result column="dep_type" javaType="java.lang.String" jdbcType="VARCHAR" property="dep_type" typeHandler="org.apache.ibatis.type.StringTypeHandler"/>
+		<result column="up_dep_no" javaType="java.lang.String" jdbcType="VARCHAR" property="up_dep_no" typeHandler="org.apache.ibatis.type.StringTypeHandler"/>
+		<result column="use_yn" javaType="java.lang.String" jdbcType="VARCHAR" property="use_yn" typeHandler="org.apache.ibatis.type.StringTypeHandler"/>
+	</resultMap>
+	
+	<sql id="tab_name">COM_DEPARTMENT</sql>
+	<sql id="rs_column_list">
+		<trim prefix="" suffixOverrides=",">DEP_NO,CUR_DEP_NO,DEP_NAME,DEP_TYPE,UP_DEP_NO,USE_YN</trim>
+	</sql>
+	
+	<!-- 根据部门编号查询部门信息    -->
+	<select id="getDepByNo" resultMap="BaseResultMap">
+		SELECT 
+		<include refid="rs_column_list"></include>
+		FROM
+		<include refid="tab_name"></include>
+		where 
+		DEP_NO = #{no}
+	</select>
+</mapper>
