@@ -3,17 +3,21 @@ package com.shc.exception;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 public class CustomExceptionResolver implements HandlerExceptionResolver {
 
+	private Logger log = Logger.getLogger(CustomExceptionResolver.class);
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception ex) {
 		//handler就是处理器适配器要执行的处理器（只有method方法）
 
+		log.error(ex.getMessage());
+		log.error(ex.getStackTrace());
         //1.解析出异常类型
         CustomException exception = null;
         //如果该异常类型是系统自定义的异常，直接取出异常信息，在错误页面展示

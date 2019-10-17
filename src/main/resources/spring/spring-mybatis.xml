@@ -44,9 +44,9 @@
                 <!--空值时是否返回实体-->
                 <prop key="returnInstanceForEmptyRow">false</prop>
                 <!--指定 MyBatis 增加到日志名称的前缀-->
-                <prop key="logPrefix">im.dhc.workflow</prop>
+                <prop key="logPrefix">COM.SHC</prop>
                 <!--指定 MyBatis 所用日志的具体实现，未指定时将自动查找。-->
-                <prop key="logImpl">SLF4J</prop>
+                <prop key="logImpl">LOG4J</prop>
                 <!--指定 Mybatis 创建具有延迟加载能力的对象所用到的代理工具。-->
                 <prop key="proxyFactory">CGLIB</prop>
             </props>

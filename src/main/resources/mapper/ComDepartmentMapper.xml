@@ -15,6 +15,28 @@
 		<trim prefix="" suffixOverrides=",">DEP_NO,CUR_DEP_NO,DEP_NAME,DEP_TYPE,UP_DEP_NO,USE_YN</trim>
 	</sql>
 	
+	<sql id="ps_column_list">
+		<trim prefix="" suffixOverrides=",">
+			#{dep_no,jdbcType=VARCHAR,javaType=java.lang.String,typeHandler=org.apache.ibatis.type.StringTypeHandler},
+			#{cur_dep_no,jdbcType=VARCHAR,javaType=java.lang.String,typeHandler=org.apache.ibatis.type.StringTypeHandler},
+			#{dep_name,jdbcType=VARCHAR,javaType=java.lang.String,typeHandler=org.apache.ibatis.type.StringTypeHandler},
+			#{dep_type,jdbcType=VARCHAR,javaType=java.lang.String,typeHandler=org.apache.ibatis.type.StringTypeHandler},
+			#{up_dep_no,jdbcType=VARCHAR,javaType=java.lang.String,typeHandler=org.apache.ibatis.type.StringTypeHandler},
+			#{use_yn,jdbcType=VARCHAR,javaType=java.lang.String,typeHandler=org.apache.ibatis.type.StringTypeHandler},
+		</trim>
+	</sql>
+	
+	<sql id="set_column_list">
+		<trim prefix="" suffixOverrides=",">
+			DEP_NO=#{dep_no,jdbcType=VARCHAR,javaType=java.lang.String,typeHandler=org.apache.ibatis.type.StringTypeHandler},
+			CUR_DEP_NO=#{cur_dep_no,jdbcType=VARCHAR,javaType=java.lang.String,typeHandler=org.apache.ibatis.type.StringTypeHandler},
+			DEP_NAME=#{dep_name,jdbcType=VARCHAR,javaType=java.lang.String,typeHandler=org.apache.ibatis.type.StringTypeHandler},
+			DEP_TYPE=#{dep_type,jdbcType=VARCHAR,javaType=java.lang.String,typeHandler=org.apache.ibatis.type.StringTypeHandler},
+			UP_DEP_NO=#{up_dep_no,jdbcType=VARCHAR,javaType=java.lang.String,typeHandler=org.apache.ibatis.type.StringTypeHandler},
+			USE_YN=#{use_yn,jdbcType=VARCHAR,javaType=java.lang.String,typeHandler=org.apache.ibatis.type.StringTypeHandler},
+		</trim>
+	</sql>
+	
 	<!-- 根据部门编号查询部门信息    -->
 	<select id="getDepByNo" resultMap="BaseResultMap">
 		SELECT 
@@ -22,6 +44,37 @@
 		FROM
 		<include refid="tab_name"></include>
 		where 
-		DEP_NO = #{no}
+		DEP_NO = #{dep_no}
 	</select>
+	
+	<!-- 插入一条记录 -->
+	<insert id="insertOne">
+		INSERT INTO 
+		<include refid="tab_name"></include>
+		(
+		<include refid="rs_column_list"></include>
+		)
+		VALUES 
+		(
+		<include refid="ps_column_list"></include>
+		)
+	</insert>
+	
+	<!-- 按部门编号更新信息 -->
+	<update id="updateByNo">
+		UPDATE
+		<include refid="tab_name"></include>
+		<set>
+			<include refid="set_column_list"></include>
+		</set>
+		WHERE DEP_NO=#{dep_no}
+	</update>
+	
+	<!-- 按id删除一条数据 -->
+    <delete id="deleteByNo">
+        DELETE FROM
+        <include refid="tab_name"/>
+        WHERE
+        DEP_NO= #{dep_no}
+    </delete>
 </mapper>

@@ -31,4 +31,39 @@ public class ComDepartmentService {
 		
 		return com_depart;
 	}
+	
+	public void addDepInfo() {
+		ComDepartmentEntity com_depart = new ComDepartmentEntity();
+		com_depart.setDep_no("1001");
+		com_depart.setCur_dep_no("160100");
+		com_depart.setDep_name("xx部门");
+		com_depart.setDep_type("2");
+		com_depart.setUp_dep_no("1000");
+		com_depart.setUse_yn("N");
+		
+		comDepartMapper.insertOne(com_depart);
+	}
+	
+	public void updateDepInfo() {
+		String dep_no ="1001";
+		ComDepartmentEntity com_depart = comDepartMapper.getDepByNo(dep_no);
+		
+		if(com_depart == null) {
+			log.error("找不到dep_no="+dep_no+"的记录");
+			throw new CustomException("查询记录为空");
+		}
+		
+		com_depart.setDep_name("xxx部门");
+		com_depart.setUse_yn("Y");
+		
+		comDepartMapper.updateByNo(com_depart);
+		
+	}
+	public void delDepInfo(String dep_no) {
+		if(StringUtils.isEmpty(dep_no)) {
+			log.error("dep_no参数异常,不可为空");
+			throw new CustomException("参数为空");
+		}
+		comDepartMapper.deleteByNo(dep_no);
+	}
 }

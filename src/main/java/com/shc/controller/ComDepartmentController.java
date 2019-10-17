@@ -22,4 +22,25 @@ public class ComDepartmentController {
 		ComDepartmentEntity comDepart = comDepartService.getDepInfoByNo(dep_no);
 		return comDepart;
 	}
+	
+	@RequestMapping("/add")
+	@ResponseBody
+	public String addDepInfo() throws Exception {
+		comDepartService.addDepInfo();
+		return "sucess";
+	}
+	
+	@RequestMapping("/update")
+	@ResponseBody
+	public String updateDepInfo() throws Exception {
+		comDepartService.updateDepInfo();
+		return "sucess";
+	}
+	
+	@RequestMapping("/del")
+	@ResponseBody
+	public String delDepByNo(@RequestParam String dep_no) throws Exception {
+		comDepartService.delDepInfo(dep_no);
+		return "sucess";
+	}
 }
